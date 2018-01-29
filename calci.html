@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head><title>Binary Calculator</title>
+<style>
+table{
+border: 2px solid red;
+border-radius: 4px;
+height:400px;
+width:300px;
+padding:20px;
+background-color: tomato;
+}
+button{
+	height:50px;
+	width:50px;
+	margin:10px;
+}
+#display{
+	background-color:grey;
+border: 2px solid black;
+	border-radius: 4px;
+	height:10px;
+	width: 160px;
+	padding: 20px;
+	text-align: right;
+	color: white;
+}
+.num{
+	background-color: yellow;
+	border-radius: 4px;
+	border: 2px solid yellow;
+}
+.oper{
+background-color: dodgerblue;
+	border-radius: 4px;
+	border: 2px offset;
+	color:white;	
+}
+</style></head>
+
+<body>
+<table >
+<tr><td><button onclick=reSet();>AC</button></td>
+<td colspan=3><p id=display></p></td>
+</tr>
+<tr>
+<td><button class=num onclick="myNum(7);">7</button></td>
+<td><button class=num onclick="myNum(8);">8</button></td>
+<td><button class=num onclick="myNum(9);">9</button></td>
+<td><button class=oper onclick="myOper('+');">+</button></td>
+</tr>
+<tr>
+<td><button class=num  onclick="myNum(4);">4</button></td>
+<td><button class=num onclick="myNum(5);">5</button></td>
+<td><button class=num onclick="myNum(6);">6</button></td>
+<td><button class=oper onclick="myOper('-');">-</button></td>
+</tr><tr>
+<td><button class=num onclick="myNum(1);">1</button></td>
+<td><button class=num  onclick="myNum(2);">2</button></td>
+<td><button class=num  onclick="myNum(3);">3</button></td>
+<td><button class=oper onclick="myOper('*');">*</button></td>
+</tr><tr>
+<td><button onclick="backSpace();">C</button></td>
+<td><button class=num onclick="myNum(0);">0</button></td>
+<td><button onclick="eQuate();">=</button></td>
+<td><button class=oper onclick="myOper('/');">/</button></td>
+</tr>
+</table>
+<p id=display1></p>
+<script>
+var num1=0;
+var num2=0;
+var len=0;
+var oper=0;
+var result=0;
+function myNum(n)
+{
+	var operand=document.getElementById('display').innerHTML;
+	operand+=n;
+	document.getElementById('display').innerHTML=operand;
+	return n;
+}
+function myOper(x)
+{
+	var operand=document.getElementById('display').innerHTML;
+	num1=parseInt(operand);
+	var abc=operand.substr(operand.length-1,operand.length);
+	if(abc=='+'||abc=='-'||abc=='*'||abc=='/')
+	{
+		document.getElementById('display').innerHTML=operand;
+	}
+	else
+	{	operand+=x;
+		document.getElementById('display').innerHTML=operand;
+	}
+	len=operand.length;
+	oper=x;
+	return operand;
+}
+function reSet()
+{
+	num1=0;
+	num2=0;
+	len=0;
+	oper=0;
+	result=0;
+	document.getElementById('display').innerHTML="";
+}
+function backSpace()
+{
+	var operand=document.getElementById('display').innerHTML;
+	operand=operand.substr(0,operand.length-1);	
+	document.getElementById('display').innerHTML=operand;
+	return operand;
+
+}
+function eQuate()
+{
+	var operand=document.getElementById('display').innerHTML;
+	var num2=parseInt(operand.substr(len,operand.length-1));
+	if(oper=='+')
+		var result=num1+num2;
+	if(oper=='-')
+		var result=num1-num2;
+	if(oper=='/')
+		var result=num1/num2;
+	if(oper=='*')
+		var result=num1*num2;
+	document.getElementById('display').innerHTML=result;
+
+}
+</script>
+</body>
+</html>
